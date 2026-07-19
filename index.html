@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071421" />
+    <title>Moonshot Grove</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="game-frame" aria-label="Moonshot Grove game">
+        <canvas id="game" aria-label="Game canvas"></canvas>
+
+        <div class="topbar" aria-hidden="true">
+          <div class="brand">
+            <span class="brand-mark">⌁</span>
+            <span>MOONSHOT<br />GROVE</span>
+          </div>
+          <div class="top-stat"><span>WAVE</span><strong id="waveLabel">01</strong></div>
+          <div class="top-stat relic-stat"><span>RELICS</span><strong id="relicLabel">0/3</strong></div>
+          <div class="top-stat align-right"><span>BEST RUN</span><strong id="bestLabel">000</strong></div>
+          <button class="pause-button" id="pauseButton" type="button" aria-label="Pause game">Ⅱ <span>PAUSE</span></button>
+        </div>
+
+        <div class="hud" aria-hidden="true">
+          <div class="hud-card player-card">
+            <div class="portrait"><span>✦</span></div>
+            <div class="meter-copy"><div class="meter-label"><span>THE WAYFARER</span><b id="levelLabel">LVL 01</b></div><div class="bar health"><i id="healthFill"></i></div><div class="meter-label small"><span id="healthText">100 / 100</span><span>VITALITY</span></div></div>
+          </div>
+          <div class="hud-card xp-card">
+            <div class="meter-label"><span>STARDUST</span><b id="xpText">0 / 5</b></div>
+            <div class="bar xp"><i id="xpFill"></i></div>
+          </div>
+          <div class="ability-card"><span class="ability-key">SPACE</span><span class="ability-name">DASH</span><i id="dashFill"></i></div>
+        </div>
+
+        <div class="crosshair" id="crosshair" aria-hidden="true"></div>
+
+        <section class="start-screen panel" id="startScreen">
+          <div class="eyebrow">A TINY SURVIVAL TALE</div>
+          <h1>DEFEND<br /><em>THE WILDS.</em></h1>
+          <p>The night is hungry. Draw your bow, keep moving, and turn stardust into strange new powers.</p>
+          <div class="map-picker" aria-label="Choose an arena">
+            <button class="map-choice selected" data-map="grove" type="button"><i class="map-swatch grove"></i><span>01</span><strong>MOONSHOT<br />GROVE</strong></button>
+            <button class="map-choice" data-map="ruins" type="button"><i class="map-swatch ruins"></i><span>02</span><strong>EMBERFALL<br />RUINS</strong></button>
+            <button class="map-choice" data-map="frost" type="button"><i class="map-swatch frost"></i><span>03</span><strong>FROSTWAKE<br />BASIN</strong></button>
+            <button class="map-choice" data-map="archives" type="button"><i class="map-swatch archives"></i><span>04</span><strong>STARFALL<br />ARCHIVES</strong></button>
+            <button class="map-choice" data-map="dunes" type="button"><i class="map-swatch dunes"></i><span>05</span><strong>GLASSWIND<br />DUNES</strong></button>
+            <button class="map-choice" data-map="canopy" type="button"><i class="map-swatch canopy"></i><span>06</span><strong>THORNVEIL<br />CANOPY</strong></button>
+          </div>
+          <div class="loadout-label">CHOOSE YOUR BOW</div>
+          <div class="bow-picker" aria-label="Choose a bow">
+            <button class="bow-choice selected" data-bow="starlight" type="button"><i>➶</i><strong>STARLIGHT</strong><span>BALANCED</span></button>
+            <button class="bow-choice" data-bow="cinder" type="button"><i>◆</i><strong>CINDER</strong><span>HEAVY HITS</span></button>
+            <button class="bow-choice" data-bow="frost" type="button"><i>✧</i><strong>FROSTSTRING</strong><span>CHILL SHOTS</span></button>
+            <button class="bow-choice" data-bow="thorn" type="button"><i>✤</i><strong>THORNWOOD</strong><span>TRIPLE SHOT</span></button>
+            <button class="bow-choice" data-bow="dusk" type="button"><i>☾</i><strong>DUSKPIERCER</strong><span>PIERCING</span></button>
+            <button class="bow-choice" data-bow="sun" type="button"><i>☀</i><strong>SUNSPIRE</strong><span>DEVASTATING</span></button>
+            <button class="bow-choice" data-bow="storm" type="button"><i>ϟ</i><strong>STORMSONG</strong><span>RAPID FIRE</span></button>
+            <button class="bow-choice" data-bow="vine" type="button"><i>❋</i><strong>VINEWHISPER</strong><span>WIDE SHOT</span></button>
+          </div>
+          <button class="primary-button" id="startButton">ENTER THE WILDS <span>↗</span></button>
+          <div class="controls"><span><kbd>W A S D</kbd> move</span><span><kbd>CLICK</kbd> draw &amp; fire</span><span><kbd>SPACE</kbd> dash</span><span><kbd>E</kbd> landmark</span></div>
+        </section>
+
+        <section class="levelup panel hidden" id="levelUpScreen">
+          <div class="eyebrow">THE GROVE LISTENS</div>
+          <h2>CHOOSE A<br /><em>BLESSING.</em></h2>
+          <p>Every path changes the rhythm of the hunt.</p>
+          <div class="upgrade-grid" id="upgradeGrid"></div>
+          <div class="select-hint">CLICK A BLESSING TO CONTINUE</div>
+        </section>
+
+        <section class="gameover panel hidden" id="gameOverScreen">
+          <div class="eyebrow">THE MOON SETS</div>
+          <h2>RUN<br /><em>ENDED.</em></h2>
+          <p id="finalStats">You reached level 1 and scattered 0 shadows.</p>
+          <button class="primary-button" id="restartButton">PLAY THIS MAP AGAIN <span>↻</span></button>
+          <button class="map-return" id="mapSelectButton" type="button">CHOOSE ANOTHER MAP</button>
+          <div class="controls"><span>PRESS <kbd>R</kbd> TO TRY AGAIN</span></div>
+        </section>
+
+        <div class="toast" id="toast"></div>
+        <div class="interact-prompt" id="interactPrompt" aria-hidden="true"></div>
+        <div class="mobile-note">Best played with a mouse and keyboard</div>
+      </section>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
