@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Archer</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#112b3a"/>
+      <stop offset=".52" stop-color="#225767"/>
+      <stop offset="1" stop-color="#76a275"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="72%" cy="22%" r="42%">
+      <stop stop-color="#dbf7cb" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#dbf7cb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#moon)"/>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="#e1f9d2" stroke-opacity=".38"/>
+  <path d="M17 12c17 9 17 31 0 40" fill="none" stroke="#efffe0" stroke-opacity=".86" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="m18 12 9 20-10 20" fill="none" stroke="#efffe0" stroke-opacity=".48" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M12 43 52 20" fill="none" stroke="#f3ffe8" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="m45 18 9 1-4 8" fill="none" stroke="#f3ffe8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m15 39-3 4 5 1" fill="none" stroke="#f3ffe8" stroke-width="2" stroke-linecap="round"/>
+</svg>
