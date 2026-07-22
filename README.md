@@ -8,4 +8,4 @@ To test locally, run:
 python3 -m http.server --bind 0.0.0.0 8002
 ```
 
-Then open [http://localhost:8002](http://localhost:8002).
+Then open http://localhost:8002.
